@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeGram — Modern Social Media Platform</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><circle cx='12' cy='12' r='10'/><path fill='white' d='M12 6a6 6 0 100 12A6 6 0 0012 6z'/></svg>">
+  
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js for Activity Dashboard Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- ========================================== -->
+    <!-- LEFT NAVIGATION SIDEBAR                    -->
+    <!-- ========================================== -->
+    <aside class="app-sidebar" id="sidebar">
+      <a href="#feed" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+            <path d="M2 12h20"></path>
+          </svg>
+        </div>
+        <span>CodeGram</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li>
+          <a href="#feed" class="nav-item active" data-nav="feed">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="#explore" class="nav-item" data-nav="explore">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+            <span>Explore</span>
+          </a>
+        </li>
+        <li>
+          <a href="#reels" class="nav-item" data-nav="reels">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 7 4-7 4Z"/></svg>
+            <span>Reels</span>
+          </a>
+        </li>
+        <li>
+          <a href="#messages" class="nav-item" data-nav="messages">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Messages</span>
+            <span class="badge" id="messages-badge" style="display:none;">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="#notifications" class="nav-item" data-nav="notifications">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+            <span>Notifications</span>
+            <span class="badge" id="notif-badge" style="display:none;">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="#bookmarks" class="nav-item" data-nav="bookmarks">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>
+            <span>Bookmarks</span>
+          </a>
+        </li>
+        <li>
+          <a href="#dashboard" class="nav-item" data-nav="dashboard">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li id="profile-nav-li">
+          <a href="#profile" class="nav-item" data-nav="profile" id="profile-nav-link">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="#settings" class="nav-item" data-nav="settings">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="post-create-btn" onclick="window.app.focusPostCreator()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <span>New Post</span>
+      </button>
+
+      <div class="sidebar-user-card" id="sidebar-user" onclick="window.app.handleSidebarUserClick()">
+        <img id="sidebar-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=guest" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+        <div style="flex-grow: 1; min-width: 0;">
+          <div id="sidebar-name" style="font-weight: 700; font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Guest Explorer</div>
+          <div id="sidebar-handle" style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Sign In / Join</div>
+        </div>
+        <button class="theme-toggle-btn" onclick="event.stopPropagation(); window.app.toggleTheme();" title="Toggle Dark/Light Mode">
+          <svg class="theme-sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ========================================== -->
+    <!-- MAIN CONTENT VIEW CONTAINER                -->
+    <!-- ========================================== -->
+    <main class="main-content" id="main-view">
+      <!-- Top Sticky Header -->
+      <header class="page-header">
+        <h1 class="page-title" id="page-title">Feed</h1>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="theme-toggle-btn" onclick="window.app.toggleTheme();" title="Toggle Dark/Light Mode">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+          <div id="auth-header-btn"></div>
+        </div>
+      </header>
+
+      <!-- Dynamic View Container -->
+      <div id="view-content" style="flex-grow: 1;">
+        <!-- Injected via Router/App -->
+      </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- RIGHT SIDEBAR WIDGETS                      -->
+    <!-- ========================================== -->
+    <aside class="app-widgets" id="widgets-panel">
+      <!-- Global Search Box -->
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-muted);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="widget-search-input" placeholder="Search CodeGram..." onkeydown="if(event.key==='Enter') window.app.handleSearchSubmit(this.value)">
+      </div>
+
+      <!-- Trending Hashtags Widget -->
+      <div class="widget-card">
+        <div class="widget-title">
+          <span>Trending Hashtags</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        </div>
+        <div id="trending-tags-container">
+          <!-- Loaded via API -->
+          <div style="font-size: 0.88rem; color: var(--text-muted);">Loading trending tags...</div>
+        </div>
+      </div>
+
+      <!-- Suggested Accounts Widget -->
+      <div class="widget-card">
+        <div class="widget-title">
+          <span>Recommended Creators</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent-purple);"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+        </div>
+        <div id="suggested-users-container">
+          <!-- Loaded via API -->
+          <div style="font-size: 0.88rem; color: var(--text-muted);">Loading recommendations...</div>
+        </div>
+      </div>
+
+      <!-- CodeGram Platform Info -->
+      <div style="font-size: 0.78rem; color: var(--text-light); line-height: 1.6; padding: 0 4px;">
+        CodeGram © 2026 • Privacy • Terms • Verified System • AI Assistant Engine • Built with Django & Modern JavaScript
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MOBILE BOTTOM NAVIGATION BAR               -->
+  <!-- ========================================== -->
+  <nav class="mobile-bottom-bar">
+    <a href="#feed" class="mobile-nav-link" data-nav="feed" style="color: var(--text-main);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+    </a>
+    <a href="#explore" class="mobile-nav-link" data-nav="explore" style="color: var(--text-muted);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+    </a>
+    <a href="#reels" class="mobile-nav-link" data-nav="reels" style="color: var(--text-muted);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 7 4-7 4Z"/></svg>
+    </a>
+    <a href="#messages" class="mobile-nav-link" data-nav="messages" style="color: var(--text-muted);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </a>
+    <a href="#profile" class="mobile-nav-link" data-nav="profile" style="color: var(--text-muted);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    </a>
+  </nav>
+
+  <!-- ========================================== -->
+  <!-- MODAL: LOGIN & REGISTER                    -->
+  <!-- ========================================== -->
+  <div class="modal-backdrop" id="auth-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="auth-modal-title">Welcome to CodeGram</h3>
+        <button class="modal-close-btn" onclick="window.app.closeAuthModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Auth Tabs -->
+        <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+          <button id="tab-login-btn" class="category-chip active" onclick="window.app.switchAuthTab('login')">Sign In</button>
+          <button id="tab-register-btn" class="category-chip" onclick="window.app.switchAuthTab('register')">Create Account</button>
+        </div>
+
+        <!-- 1-Click Demo Account Quick Fill Button -->
+        <div style="margin-bottom: 16px; padding: 12px; background: var(--primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-weight: 700; font-size: 0.88rem; color: var(--primary);">Instant Demo Access</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Explore with pre-seeded creator profile</div>
+          </div>
+          <button class="btn-primary" style="padding: 6px 14px; font-size: 0.82rem;" onclick="window.app.quickDemoLogin()">1-Click Demo</button>
+        </div>
+
+        <!-- Form -->
+        <form id="auth-form" onsubmit="window.app.handleAuthSubmit(event)">
+          <div id="auth-name-group" style="display: none; margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Display Name</label>
+            <input type="text" id="auth-display-name" class="poll-option-input" placeholder="e.g. Alex Morgan">
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Username or Email</label>
+            <input type="text" id="auth-username" class="poll-option-input" placeholder="Enter username" required>
+          </div>
+          <div id="auth-email-group" style="display: none; margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Email Address</label>
+            <input type="email" id="auth-email" class="poll-option-input" placeholder="alex@codegram.io">
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Password</label>
+            <input type="password" id="auth-password" class="poll-option-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" id="auth-submit-btn" class="btn-primary" style="width: 100%; padding: 12px; font-size: 1rem;">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: AI-POWERED CAPTION ASSISTANT        -->
+  <!-- ========================================== -->
+  <div class="modal-backdrop" id="ai-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.25rem;">✨</span>
+          <h3 class="modal-title">AI Caption & Hashtag Assistant</h3>
+        </div>
+        <button class="modal-close-btn" onclick="window.app.closeAiModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px;">
+          Describe what you want to post or paste a draft, and let CodeGram's AI generate high-converting captions with tailored hashtags!
+        </p>
+
+        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Topic or Idea</label>
+        <textarea id="ai-prompt-input" class="poll-option-input" style="height: 70px; resize: none;" placeholder="e.g. Launched a new open-source design library for web developers"></textarea>
+
+        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">Select Tone</label>
+        <div class="ai-tone-chips">
+          <button class="tone-chip active" data-tone="engaging" onclick="window.app.selectAiTone(this)">🔥 Engaging</button>
+          <button class="tone-chip" data-tone="professional" onclick="window.app.selectAiTone(this)">💼 Professional</button>
+          <button class="tone-chip" data-tone="funny" onclick="window.app.selectAiTone(this)">😂 Funny</button>
+          <button class="tone-chip" data-tone="minimalist" onclick="window.app.selectAiTone(this)">⚡ Minimalist</button>
+          <button class="tone-chip" data-tone="poetic" onclick="window.app.selectAiTone(this)">🕊️ Poetic</button>
+        </div>
+
+        <button class="btn-primary" style="width: 100%; padding: 10px; margin-bottom: 18px;" onclick="window.app.generateAiCaptions()">
+          <span>Generate Captions</span>
+        </button>
+
+        <!-- Output Suggestions -->
+        <div id="ai-results-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: CREATE STORY                        -->
+  <!-- ========================================== -->
+  <div class="modal-backdrop" id="create-story-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title">Create 24h Story</h3>
+        <button class="modal-close-btn" onclick="window.app.closeModal('create-story-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="window.app.submitNewStory(event)">
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Story Text / Caption</label>
+            <input type="text" id="story-text-input" class="poll-option-input" placeholder="What's happening right now?" required>
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Image URL (optional)</label>
+            <input type="url" id="story-image-input" class="poll-option-input" placeholder="https://images.unsplash.com/...">
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Background Style</label>
+            <select id="story-gradient-input" class="poll-option-input">
+              <option value="linear-gradient(135deg, #6366f1, #8b5cf6)">Indigo Violet (Default)</option>
+              <option value="linear-gradient(135deg, #ec4899, #8b5cf6)">Sunset Neon</option>
+              <option value="linear-gradient(135deg, #3b82f6, #2dd4bf)">Ocean Breeze</option>
+              <option value="linear-gradient(135deg, #f59e0b, #ef4444)">Warm Amber</option>
+              <option value="linear-gradient(135deg, #0f172a, #1e293b)">Midnight Obsidian</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; padding: 12px;">Publish Story (Expires in 24h)</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: STORY VIEWER                        -->
+  <!-- ========================================== -->
+  <div class="modal-backdrop" id="story-viewer-modal">
+    <div class="story-viewer-modal" id="story-viewer-card">
+      <div class="story-progress-bar-container">
+        <div class="story-progress-segment">
+          <div class="story-progress-fill" id="story-viewer-progress"></div>
+        </div>
+      </div>
+      <!-- User info header -->
+      <div style="position: absolute; top: 22px; left: 16px; right: 16px; display: flex; align-items: center; justify-content: space-between; z-index: 25;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img id="story-viewer-avatar" src="" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid white;">
+          <div>
+            <div id="story-viewer-user" style="font-weight: 700; font-size: 0.92rem; text-shadow: 0 1px 3px rgba(0,0,0,0.8);"></div>
+            <div id="story-viewer-time" style="font-size: 0.75rem; opacity: 0.85;"></div>
+          </div>
+        </div>
+        <button onclick="window.app.closeStoryViewer()" style="color: white; font-size: 24px; padding: 4px;">✕</button>
+      </div>
+
+      <!-- Story Content Display -->
+      <div class="story-view-content" id="story-viewer-content">
+        <!-- Injected via app -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: CREATE REEL                         -->
+  <!-- ========================================== -->
+  <div class="modal-backdrop" id="create-reel-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title">Share a Short Video / Reel</h3>
+        <button class="modal-close-btn" onclick="window.app.closeModal('create-reel-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="window.app.submitNewReel(event)">
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Title</label>
+            <input type="text" id="reel-title-input" class="poll-option-input" placeholder="Catchy title" required>
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Video URL (Direct MP4 or Web Video)</label>
+            <input type="url" id="reel-video-input" class="poll-option-input" placeholder="https://.../video.mp4" value="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" required>
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Thumbnail URL (optional)</label>
+            <input type="url" id="reel-thumb-input" class="poll-option-input" placeholder="https://images.unsplash.com/...">
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Audio / Song Credit</label>
+            <input type="text" id="reel-song-input" class="poll-option-input" placeholder="Original Audio - Artist">
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Description</label>
+            <textarea id="reel-desc-input" class="poll-option-input" style="height: 60px; resize: none;" placeholder="Tell viewers about your reel..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; padding: 12px;">Upload Reel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: REPORT CONTENT                      -->
+  <!-- ========================================== -->
+  <div class="modal-backdrop" id="report-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title">Report Inappropriate Content</h3>
+        <button class="modal-close-btn" onclick="window.app.closeModal('report-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="window.app.submitReport(event)">
+          <input type="hidden" id="report-user-id">
+          <input type="hidden" id="report-post-id">
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Reason for Report</label>
+            <select id="report-reason-select" class="poll-option-input">
+              <option value="Spam or misleading">Spam or misleading</option>
+              <option value="Harassment or hate speech">Harassment or hate speech</option>
+              <option value="Inappropriate imagery">Inappropriate imagery</option>
+              <option value="Copyright violation">Copyright violation</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Additional Details</label>
+            <textarea id="report-details" class="poll-option-input" style="height: 70px;" placeholder="Provide brief context..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; background: var(--accent-rose);">Submit Report</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TOAST NOTIFICATION CONTAINER               -->
+  <!-- ========================================== -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/components.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
